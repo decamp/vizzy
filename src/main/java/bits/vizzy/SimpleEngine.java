@@ -16,11 +16,11 @@ import bits.draw3d.DrawNodeAdapter;
 import bits.draw3d.actors.Actor;
 import bits.draw3d.camera.CameraNode;
 import bits.draw3d.scene.SceneGraph;
+import bits.draw3d.shader.ShaderManager;
 import bits.draw3d.text.FontManager;
 import bits.glui.*;
 import bits.math3d.*;
 import bits.microtime.Clock;
-import bits.vizor.input.*;
 import bits.vizzy.input.*;
 
 
@@ -134,7 +134,12 @@ public class SimpleEngine {
     public FontManager fontManager() {
         return mRootController.fontManager();
     }
-    
+
+
+    public ShaderManager shaderManeger() {
+        return mRootController.shaderManager();
+    }
+
     
     public Actor camera() {
         return mCamera;
