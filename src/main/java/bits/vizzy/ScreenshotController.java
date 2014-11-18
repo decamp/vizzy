@@ -4,7 +4,7 @@
  * http://opensource.org/licenses/BSD-2-Clause
  */
 
-package bits.vizor;
+package bits.vizzy;
 
 import java.io.*;
 import java.util.*;

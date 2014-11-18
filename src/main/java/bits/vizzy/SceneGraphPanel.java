@@ -4,7 +4,7 @@
  * http://opensource.org/licenses/BSD-2-Clause
  */
 
-package bits.vizor;
+package bits.vizzy;
 
 import bits.draw3d.*;
 import bits.draw3d.scene.*;

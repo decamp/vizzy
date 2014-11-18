@@ -4,7 +4,7 @@
  * http://opensource.org/licenses/BSD-2-Clause
  */
 
-package bits.vizor;
+package bits.vizzy;
 
 import java.awt.*;
 import javax.swing.JFrame;
@@ -21,6 +21,7 @@ import bits.glui.*;
 import bits.math3d.*;
 import bits.microtime.Clock;
 import bits.vizor.input.*;
+import bits.vizzy.input.*;
 
 
 /**
@@ -63,10 +64,10 @@ public class SimpleEngine {
     private Object mModelGraph     = null;
     private Object mPostModelGraph = null;
 
-    private final Box3  mModelBounds = new Box3( -100, -100, -100, 100, 100, 100 );
-    private boolean mAutoSetControlSpeed = true;
-    private float   mAutoSetControlScale = 1;
-    private float   mMaxFps              = 80;
+    private final Box3    mModelBounds         = new Box3( -100, -100, -100, 100, 100, 100 );
+    private       boolean mAutoSetControlSpeed = true;
+    private       float   mAutoSetControlScale = 1;
+    private       float   mMaxFps              = 80;
 
 
     private SimpleEngine( Clock clock, GLCapabilities caps ) {
@@ -103,7 +104,7 @@ public class SimpleEngine {
 
     public JFrame buildFrame( int w, int h ) {
         JFrame frame = new JFrame();
-        
+
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
         frame.add( awtComponent() );
         frame.getContentPane().setPreferredSize( new Dimension( w, h ) );

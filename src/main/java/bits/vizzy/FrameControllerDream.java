@@ -4,7 +4,7 @@
  * http://opensource.org/licenses/BSD-2-Clause
  */
 
-package bits.vizor;
+package bits.vizzy;
 
 import javax.media.opengl.GL;
 import com.jogamp.opengl.util.texture.Texture;

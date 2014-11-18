@@ -4,9 +4,7 @@
  * http://opensource.org/licenses/BSD-2-Clause
  */
 
-package bits.vizor;
-
-import javax.media.opengl.GL;
+package bits.vizzy;
 
 import bits.blob.Blob;
 import bits.draw3d.DrawEnv;

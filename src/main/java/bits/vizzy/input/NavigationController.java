@@ -4,7 +4,7 @@
  * http://opensource.org/licenses/BSD-2-Clause
  */
 
-package bits.vizor.input;
+package bits.vizzy.input;
 
 import bits.draw3d.DrawEnv;
 import bits.draw3d.DrawNodeAdapter;
