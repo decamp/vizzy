@@ -60,7 +60,7 @@ public final class NavigationController extends DrawNodeAdapter implements GKeyL
 
     @SuppressWarnings( "unused" )
     private final DeltaMouseGroup mMouseGroup;
-    private final VelocityActor   mTarget;
+    private final WalkingActor    mTarget;
     private final Clock           mClock;
 
     private long mPrevMicros = Long.MAX_VALUE;
@@ -69,7 +69,7 @@ public final class NavigationController extends DrawNodeAdapter implements GKeyL
     private KeyboardMode mKeyMode   = KeyboardMode.WASD;
 
     private float mMoveSpeed = 10.0f / 8.0f;
-    private float mRotSpeed  = (float)( 0.25 * Math.PI / 300.0 );
+    private float mRotSpeed  = (float)(0.25 * Math.PI / 300.0);
 
     // Forward, left, backward, right, up, down
     private boolean[] mForce = { false, false, false, false, false, false };
@@ -81,16 +81,17 @@ public final class NavigationController extends DrawNodeAdapter implements GKeyL
     private float mRotY   = 0;
 
 
-    public NavigationController( Clock clock, VelocityActor target ) {
+    public NavigationController( Clock clock, WalkingActor target ) {
         mTarget = target;
-        mClock  = clock;
+        mClock = clock;
         DeltaMouseGroup g = null;
 
         try {
             g = DeltaMouseGroup.create();
             g.addListener( new MouseHandler() );
             g.start();
-        } catch( HidException ignored ) {}
+        } catch( HidException ignored ) {
+        }
 
         mMouseGroup = g;
         mouseMode( MouseMode.OFF );

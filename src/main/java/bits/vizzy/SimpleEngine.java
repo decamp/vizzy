@@ -54,7 +54,7 @@ public class SimpleEngine {
     private final GRootController mRootController;
     private final SceneGraphPanel mRenderPane;
 
-    private final VelocityActor        mCamera;
+    private final WalkingActor         mCamera;
     private final CameraNode           mCameraNode;
     private final SpaceMouseController mSpaceMouseCont;
     private final NavigationController mNavCont;
@@ -77,7 +77,7 @@ public class SimpleEngine {
         mRenderPane = new SceneGraphPanel();
         mRootController.rootPane().addChild( mRenderPane );
 
-        mCamera = new VelocityActor();
+        mCamera = new WalkingActor();
         mSpaceMouseCont = new SpaceMouseController( clock, mCamera );
         mNavCont = new NavigationController( clock, mCamera );
         mCameraNode = new CameraNode( mCamera );
@@ -221,33 +221,26 @@ public class SimpleEngine {
         }     
         
         SceneGraph graph = new SceneGraph();
-        Object root      = new InitNode();
-        
+        graph.add( new InitNode() );
+
         if( mPreModelGraph != null ) {
-            graph.connectLast( root, mPreModelGraph );
-            root = mPreModelGraph;
+            graph.connectLast( mPreModelGraph );
         }
-        
-        graph.connectLast( root, mCameraNode );
-        graph.connectLast( mCameraNode, mSpaceMouseCont );
-        graph.connectLast( mSpaceMouseCont, mNavCont );
-        
-        Object parent = mNavCont;
-        
+
+        graph.connectLast( mCameraNode );
+        graph.connectLast( mSpaceMouseCont );
+        graph.connectLast( mNavCont );
+
         if( mLightGraph != null ) {
-            graph.connectLast( parent, mLightGraph );
-            parent = mLightGraph;
+            graph.connectLast( mLightGraph );
         }
-        
         if( mModelGraph != null ) {
-            graph.connectLast( parent, mModelGraph );
-            parent = mModelGraph;
+            graph.connectLast( mModelGraph );
         }
-        
         if( mPostModelGraph != null ) {
-            graph.connectLast( root, mPostModelGraph );
+            graph.connectLast( mPostModelGraph );
         }
-        
+
         mRenderPane.setGraph( graph );
         mRootController.startAnimator( maxFps );
     }
@@ -260,17 +253,11 @@ public class SimpleEngine {
     
     
     private static final class InitNode extends DrawNodeAdapter {
-        
         @Override
         public void pushDraw( DrawEnv d ) {
-            d.mCullFace.set( false );
-            d.mDepthTest.set(  true, GL_LEQUAL );
-            //gl.glMatrixMode( GL_PROJECTION );
-            //gl.glLoadIdentity();
-            //gl.glMatrixMode( GL_MODELVIEW );
-            //gl.glLoadIdentity();
+            d.mCullFace.set( true );
+            d.mDepthTest.set( true, GL_LEQUAL );
         }
-        
     }
 
 
