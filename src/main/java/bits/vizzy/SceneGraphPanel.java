@@ -72,9 +72,6 @@ public class SceneGraphPanel extends GPanel {
         
         if( mReshape ) {
             mReshape    = false;
-            final int w = width();
-            final int h = height();
-            
             for( GraphStep<DrawNode> s: path ) {
                 if( s.type() == GraphActionType.PUSH ) {
                     if( s.target() instanceof ReshapeListener ) {

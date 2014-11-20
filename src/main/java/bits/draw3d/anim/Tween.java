@@ -6,11 +6,6 @@
 
 package bits.draw3d.anim;
 
-import bits.draw3d.DrawEnv;
-
-import javax.media.opengl.GL;
-
-
 /**
  * @author decamp
  */

@@ -34,9 +34,9 @@ public class ClockNode extends DrawNodeAdapter {
     {
         PlayController playCont;
         if( stepping ) {
-            playCont = PlayController.newSteppingInstance( startMicros, stepMicros );
+            playCont = PlayController.createStepping( startMicros, stepMicros );
         } else {
-            playCont = PlayController.newRealtimeInstance( 0, 1.0 );
+            playCont = PlayController.createRealtime( 0, 1.0 );
         }
         
         return new ClockNode( playCont );

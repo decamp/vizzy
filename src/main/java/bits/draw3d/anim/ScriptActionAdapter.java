@@ -8,15 +8,12 @@ package bits.draw3d.anim;
 
 import bits.draw3d.DrawEnv;
 
-import javax.media.opengl.GL;
-
 
 /**
  * @author decamp
  */
 public class ScriptActionAdapter implements ScriptAction {
-    
-    
+
     private final long mStartMicros;
     private final long mStopMicros;
     
@@ -44,5 +41,4 @@ public class ScriptActionAdapter implements ScriptAction {
     public boolean isComplete() {
         return false;
     }
-    
 }

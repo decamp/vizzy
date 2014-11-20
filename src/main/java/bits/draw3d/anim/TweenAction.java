@@ -6,11 +6,8 @@
 
 package bits.draw3d.anim;
 
-import javax.media.opengl.GL;
-
 import bits.draw3d.DrawEnv;
 import bits.math3d.func.Function11;
-
 
 
 /**

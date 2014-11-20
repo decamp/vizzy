@@ -8,9 +8,6 @@ package bits.draw3d.anim;
 
 import bits.draw3d.DrawEnv;
 
-import javax.media.opengl.GL;
-
-
 /**
  * @author decamp
  */
@@ -23,7 +20,8 @@ public class ScriptRunnable implements ScriptAction {
     public ScriptRunnable( long micros ) {
         this( micros, null );
     }
-    
+
+
     public ScriptRunnable( long micros, Runnable r ) {
         mMicros = micros;
         mRun    = r;
