@@ -11,12 +11,10 @@ import javax.swing.JFrame;
 import javax.media.opengl.*;
 import static javax.media.opengl.GL.*;
 
-import bits.draw3d.DrawEnv;
-import bits.draw3d.DrawNodeAdapter;
+import bits.draw3d.*;
 import bits.draw3d.actors.Actor;
 import bits.draw3d.camera.CameraNode;
 import bits.draw3d.scene.SceneGraph;
-import bits.draw3d.shader.ShaderManager;
 import bits.draw3d.text.FontManager;
 import bits.glui.*;
 import bits.math3d.*;
