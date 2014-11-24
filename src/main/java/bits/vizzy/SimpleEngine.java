@@ -134,7 +134,7 @@ public class SimpleEngine {
     }
 
 
-    public ShaderManager shaderManeger() {
+    public ShaderManager shaderManager() {
         return mRootController.shaderManager();
     }
 
