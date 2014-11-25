@@ -22,8 +22,6 @@ public class TestVizzy {
         launchApp();
     }
 
-
-
     static void launchApp() throws Exception {
         ClockNode clock = ClockNode.create( false, 0, 0 );
         SimpleEngine eng = SimpleEngine.create( clock.playCont().masterClock(), 8 );
@@ -34,13 +32,11 @@ public class TestVizzy {
         model.connectLast( new DrawNodeAdapter() {
             @Override
             public void pushDraw( DrawEnv d ) {
-
-
-                d.mCullFace.set( false );
+                d.mCullFace.apply( false );
                 d.mView.push();
                 //d.mView.identity();
                 d.mProj.push();
-                d.mLineWidth.set( 5f );
+                d.mLineWidth.apply( 5f );
 
                 //d.mProj.identity();
                 //d.mProj.setFrustum( -0.75f, 0.75f, -1f, 1f, 0.25f, 50.f );

@@ -253,8 +253,8 @@ public class SimpleEngine {
     private static final class InitNode extends DrawNodeAdapter {
         @Override
         public void pushDraw( DrawEnv d ) {
-            d.mCullFace.set( true );
-            d.mDepthTest.set( true, GL_LEQUAL );
+            d.mCullFace.apply( true );
+            d.mDepthTest.apply( true, GL_LEQUAL );
         }
     }
 
