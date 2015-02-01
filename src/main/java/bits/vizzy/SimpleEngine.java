@@ -83,7 +83,7 @@ public class SimpleEngine {
         mCamera.rotate( (float)(Math.PI * 0.5), 0, 1, 0 );
         mCamera.rotate( (float)(-Math.PI * 0.5), 1, 0, 0 );
 
-        mRenderPane.addKeyListener( mNavCont );
+        mRootController.eventController().keyboardFocusManager().addKeyEventPostProcessor( mNavCont );
     }
 
 

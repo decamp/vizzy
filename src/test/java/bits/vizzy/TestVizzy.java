@@ -9,6 +9,7 @@ package bits.vizzy;
 import bits.draw3d.*;
 import bits.draw3d.scene.SceneGraph;
 import bits.math3d.Box3;
+import bits.vizzy.input.NavigationController;
 
 import javax.swing.*;
 
@@ -26,6 +27,7 @@ public class TestVizzy {
         ClockNode clock = ClockNode.create( false, 0, 0 );
         SimpleEngine eng = SimpleEngine.create( clock.playCont().masterClock(), 8 );
         eng.setModelBounds( new Box3( -20, -20, -20, 20, 20, 20 ) );
+        eng.navigationCont().mouseMode( NavigationController.MouseMode.MOVE );
 
         SceneGraph model = new SceneGraph();
         model.add( clock );
@@ -74,6 +76,5 @@ public class TestVizzy {
         frame.setVisible( true );
         eng.start( 60.0 );
     }
-
 
 }

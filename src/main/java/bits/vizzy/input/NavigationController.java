@@ -9,6 +9,8 @@ package bits.vizzy.input;
 import bits.draw3d.DrawEnv;
 import bits.draw3d.DrawNodeAdapter;
 import bits.draw3d.actors.*;
+import bits.glui.GKeyEventDispatcher;
+import bits.glui.GKeyEventPostProcessor;
 import bits.glui.event.*;
 import bits.hidpunk.HidException;
 import bits.hidpunk.deltamouse.*;
@@ -16,8 +18,7 @@ import bits.math3d.Vec3;
 import bits.microtime.Clock;
 
 
-public final class NavigationController extends DrawNodeAdapter implements GKeyListener {
-
+public final class NavigationController extends DrawNodeAdapter implements GKeyEventDispatcher, GKeyEventPostProcessor {
 
     public static enum MouseMode {
         OFF,
@@ -58,7 +59,6 @@ public final class NavigationController extends DrawNodeAdapter implements GKeyL
     private static final int UP       = 4;
     private static final int DOWN     = 5;
 
-    @SuppressWarnings( "unused" )
     private final DeltaMouseGroup mMouseGroup;
     private final WalkingActor    mTarget;
     private final Clock           mClock;
@@ -259,24 +259,35 @@ public final class NavigationController extends DrawNodeAdapter implements GKeyL
     }
 
 
+    @Override
+    public boolean dispatchKeyEvent( GKeyEvent e ) {
+        return handleKey( e );
+    }
 
-    public void keyPressed( GKeyEvent e ) {
-        handleKey( e, true );
+    @Override
+    public boolean postProcessKeyEvent( GKeyEvent e ) {
+        return handleKey( e );
     }
 
 
-    public void keyReleased( GKeyEvent e ) {
-        handleKey( e, false );
-    }
+    private boolean handleKey( GKeyEvent e ) {
+        boolean press;
 
+        switch( e.id() ) {
+        case GKeyEvent.KEY_PRESSED:
+            press = true;
+            break;
+        case GKeyEvent.KEY_RELEASED:
+            press = false;
+            break;
+        default:
+            return false;
+        }
 
-    public void keyTyped( GKeyEvent e ) {}
-
-
-    private void handleKey( GKeyEvent e, boolean press ) {
         switch( e.getKeyCode() ) {
         case KEY_LEFT:
             goLeft( press );
+            e.consume();
             break;
         case KEY_BACKWARD:
             goBackward( press );
@@ -293,9 +304,13 @@ public final class NavigationController extends DrawNodeAdapter implements GKeyL
         case KEY_DOWN:
             goDown( press );
             break;
+        default:
+            return false;
         }
-    }
 
+        e.consume();
+        return true;
+    }
 
 
     private void updateMoveSpeed() {
