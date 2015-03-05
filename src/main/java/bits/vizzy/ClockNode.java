@@ -36,7 +36,7 @@ public class ClockNode extends DrawNodeAdapter {
         if( stepping ) {
             playCont = PlayController.createStepping( startMicros, stepMicros );
         } else {
-            playCont = PlayController.createRealtime( 0, 1.0 );
+            playCont = PlayController.createRealtime();
         }
         
         return new ClockNode( playCont );
@@ -64,7 +64,7 @@ public class ClockNode extends DrawNodeAdapter {
 
     @Override
     public void pushDraw( DrawEnv d ) {
-        mPlayCont.updateClocks();
+        mPlayCont.tick();
         mTweenExec.pushDraw( d );
     }
 

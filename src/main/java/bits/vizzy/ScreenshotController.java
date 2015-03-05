@@ -74,7 +74,7 @@ public class ScreenshotController extends DrawNodeAdapter {
         
         if( mTiledShot ) {
             if( mPlayCont.clock().isPlaying() ) {
-                mPlayCont.control().playStop();
+                mPlayCont.control().clockStop();
                 mTimeStopped = true;
             }
         }
@@ -136,7 +136,7 @@ public class ScreenshotController extends DrawNodeAdapter {
             
             // Resume clock.
             if( mTimeStopped ) {
-                mPlayCont.control().playStart();
+                mPlayCont.control().clockStart();
             }
             
             // Combine the tiles.
