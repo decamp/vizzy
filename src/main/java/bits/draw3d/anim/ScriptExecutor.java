@@ -34,13 +34,13 @@ public class ScriptExecutor extends DrawNodeAdapter {
 
     private final Clock mClock;
     private final TimeRangedSet<ScriptAction> mActions = new TimeRangedSet<ScriptAction>();
-
     private final Queue<Update> mUpdates = new LinkedList<Update>();
 
 
     public ScriptExecutor( Clock clock ) {
         mClock = clock;
     }
+
 
 
     public Clock clock() {
@@ -152,7 +152,7 @@ public class ScriptExecutor extends DrawNodeAdapter {
     }
     
     
-    public Object listCancel( Object opaque ) {
+    public static Object listCancel( Object opaque ) {
         ScriptAction[] arr = (ScriptAction[])opaque;
         if( arr == null ) {
             return null;
@@ -251,7 +251,7 @@ public class ScriptExecutor extends DrawNodeAdapter {
             mCode   = code;
             mAction = action;
         }
-        
+
     }
     
 }
