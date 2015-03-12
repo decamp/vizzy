@@ -6,16 +6,14 @@
 
 package bits.draw3d.anim;
 
-import bits.draw3d.actors.Actor;
 import bits.math3d.*;
-
 
 /**
  * @author decamp
  */
 public class PovLerpTween implements Tween {
 
-    private final Actor mTarget;
+    private final Trans3 mTarget;
 
     private Vec3 mStartPos;
     private final Vec4 mStartQuat = new Vec4();
@@ -24,12 +22,12 @@ public class PovLerpTween implements Tween {
     private final Vec4 mWork      = new Vec4();
 
 
-    public PovLerpTween( Trans3 stop, Actor target ) {
+    public PovLerpTween( Trans3 stop, Trans3 target ) {
         this( null, stop, target );
     }
 
 
-    public PovLerpTween( Trans3 optStart, Trans3 stopRef, Actor target ) {
+    public PovLerpTween( Trans3 optStart, Trans3 stopRef, Trans3 target ) {
         mTarget = target;
         if( optStart != null ) {
             mStartPos = optStart.mPos;

@@ -7,6 +7,8 @@ package bits.vizzy.input;
 
 
 import bits.draw3d.actors.*;
+import bits.draw3d.anim.ScriptExecutor;
+import bits.draw3d.anim.TweenActor;
 import bits.math3d.*;
 
 
@@ -18,7 +20,7 @@ import bits.math3d.*;
  * 
  * @author decamp
  */
- public class WalkingActor extends Actor {
+ public class WalkingActor extends TweenActor {
 
     private static final Vec3 FORWARD = ActorCoords.newForwardAxis();
     private static final Vec3 UP      = ActorCoords.newUpAxis();
@@ -47,6 +49,12 @@ import bits.math3d.*;
     private MoveMode mMode     = MoveMode.FLY;
     private boolean  mRollLock = false;
 
+
+    public WalkingActor( ScriptExecutor exec ) {
+        super( exec );
+    }
+
+
     /**
      * Changes time without updating position/rotation.
      */
@@ -70,6 +78,9 @@ import bits.math3d.*;
         move( delta * mMoveVel.x, delta * mMoveVel.y, delta * mMoveVel.z );
 
         mTime = time;
+        if( mRollLock ) {
+            removeRoll();
+        }
     }
 
     /**
@@ -136,7 +147,8 @@ import bits.math3d.*;
         Vec.mult( 1f / len, y );
         Mat.basisVecsToRotation( x, y, mRot );
     }
-    
+
+
     /**
      * For flying mode, motion of the actor not restricted.
      */
@@ -163,6 +175,5 @@ import bits.math3d.*;
         Mat.mult( mRot, v, v );
         translate( v.x, v.y, v.z );
    }
-
 
 }

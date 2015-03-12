@@ -28,9 +28,9 @@ public class Scripter implements Clock {
     public Scripter( ScriptExecutor exec ) {
         this( exec, false );
     }
+
     
-    
-    private Scripter( ScriptExecutor exec, boolean enableCancel ) {
+    public Scripter( ScriptExecutor exec, boolean enableCancel ) {
         mExec    = exec;
         mClock   = exec.clock();
         mTime    = mClock.micros();

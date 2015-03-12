@@ -25,7 +25,7 @@ public class TestVizzy {
 
     static void launchApp() throws Exception {
         ClockNode clock = ClockNode.create( false, 0, 0 );
-        SimpleEngine eng = SimpleEngine.create( clock.playCont().masterClock(), 8 );
+        SimpleEngine eng = SimpleEngine.create( clock.playCont().masterClock(), clock.tweenExec(), 8 );
         eng.setModelBounds( new Box3( -20, -20, -20, 20, 20, 20 ) );
         eng.navigationCont().mouseMode( NavigationController.MouseMode.MOVE );
 

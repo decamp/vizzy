@@ -19,13 +19,7 @@ import bits.microtime.*;
  * 
  * @author decamp
  */
-public class ScriptExecutor extends DrawNodeAdapter {
-
-    
-    public static ScriptExecutor newInstance( Clock clock ) {
-        return new ScriptExecutor( clock );
-    }
-
+public class ScriptExecutor implements Ticker {
 
     private static final int UPDATE_ADD   = 0;
     //private static final int UPDATE_REMOVE = 1;
@@ -94,10 +88,9 @@ public class ScriptExecutor extends DrawNodeAdapter {
         mUpdates.offer( new Update( UPDATE_CLEAR, null ) );
     }
     
-    
-    
-    @Override
-    public void pushDraw( DrawEnv d ) {
+
+
+    public void tick() {
         while( true ) {
             Update up = null;
             synchronized( this ) {
@@ -117,7 +110,7 @@ public class ScriptExecutor extends DrawNodeAdapter {
                 for( ScriptAction a: mActions ) {
                     a.cancel();
                     // Give script a chance to release GL assets.
-                    a.update( d, t );
+                    a.update( t );
                 }
                 mActions.clear();
                 break;
@@ -132,7 +125,7 @@ public class ScriptExecutor extends DrawNodeAdapter {
         Iterator<ScriptAction> iter = mActions.intersectionSet( Long.MIN_VALUE, t ).iterator();
 
         while( iter.hasNext() ) {
-            if( iter.next().update( d, t ) ) {
+            if( iter.next().update( t ) ) {
                 iter.remove();
             }    
         }

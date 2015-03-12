@@ -6,7 +6,6 @@
 
 package bits.draw3d.anim;
 
-import bits.draw3d.DrawEnv;
 import bits.microtime.TimeRanged;
 
 /**
@@ -18,7 +17,7 @@ public interface ScriptAction extends TimeRanged {
      * @param micros current time
      * @return true iff script is complete
      */
-    public boolean update( DrawEnv d, long micros );
+    public boolean update( long micros );
     
     /**
      * Tells the action that it has been cancelled.

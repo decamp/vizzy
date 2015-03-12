@@ -39,7 +39,7 @@ public class ScriptRunnable implements ScriptAction {
     }
 
     @Override
-    public boolean update( DrawEnv d, long micros ) {
+    public boolean update( long micros ) {
         if( !mComplete ) {
             run();
             mComplete = true;

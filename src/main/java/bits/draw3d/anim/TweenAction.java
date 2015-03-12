@@ -6,7 +6,6 @@
 
 package bits.draw3d.anim;
 
-import bits.draw3d.DrawEnv;
 import bits.math3d.func.Function11;
 
 
@@ -40,12 +39,14 @@ public class TweenAction implements ScriptAction {
     public long startMicros() {
         return mStartMicros;
     }
-    
+
+
     public long stopMicros() {
         return mStopMicros;
     }
-    
-    public boolean update( DrawEnv d, long t ) {
+
+
+    public boolean update( long t ) {
         if( mComplete ) {
             if( mCancel ) {
                 mTween.cancel();
@@ -54,11 +55,12 @@ public class TweenAction implements ScriptAction {
             
             return true;
         }
-        
-        if( t < mStartMicros )
-            return false;
-        
+
         if( mNeedInit ) {
+            if( t < mStartMicros ) {
+                return false;
+            }
+
             mNeedInit = false;
             mTween.init();
         }
@@ -83,15 +85,18 @@ public class TweenAction implements ScriptAction {
         return true;
         
     }
-    
+
+
     public void cancel() {
         if( mComplete ) {
             return;
         }
         mCancel   = true;
         mComplete = true;
+        mTween.cancel();
     }
-    
+
+
     public boolean isComplete() {
         return mComplete;
     }

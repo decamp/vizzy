@@ -183,7 +183,7 @@ public class TweenActor extends Actor implements ColorObject {
 
     
     protected void cancelActions( int action ) {
-        mActions[ action ] = mExec.listCancel( mActions[ action ] );
+        mActions[ action ] = ScriptExecutor.listCancel( mActions[ action ] );
     }
     
     

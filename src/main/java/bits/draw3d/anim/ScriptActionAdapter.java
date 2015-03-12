@@ -32,7 +32,7 @@ public class ScriptActionAdapter implements ScriptAction {
         return mStopMicros;
     }
     
-    public boolean update( DrawEnv d, long t ) {
+    public boolean update( long t ) {
         return true;
     }
     

@@ -13,6 +13,7 @@ import static javax.media.opengl.GL.*;
 
 import bits.draw3d.*;
 import bits.draw3d.actors.Actor;
+import bits.draw3d.anim.ScriptExecutor;
 import bits.draw3d.camera.CameraNode;
 import bits.draw3d.scene.SceneGraph;
 import bits.draw3d.text.FontManager;
@@ -27,31 +28,27 @@ import bits.vizzy.input.*;
  */
 public class SimpleEngine {
 
-    
-    public static SimpleEngine create( Clock clock ) {
-        return new SimpleEngine( clock, null );
-    }
-    
-    
-    public static SimpleEngine create( Clock clock, int numSamples ) {
+
+    public static SimpleEngine create( Clock clock, ScriptExecutor optExec, int numSamples ) {
         GLCapabilities caps = newDefaultCaps();
         caps.setNumSamples( numSamples );
         caps.setSampleBuffers( numSamples > 1 );
-        return new SimpleEngine( clock, caps );
+        return new SimpleEngine( clock, optExec, caps );
     }
     
     
-    public static SimpleEngine create( Clock clock, GLCapabilities caps ) {
-        if( caps == null ) {
-            caps = newDefaultCaps();
+    public static SimpleEngine create( Clock clock, ScriptExecutor optExec, GLCapabilities optCaps ) {
+        if( optCaps == null ) {
+            optCaps = newDefaultCaps();
         }
-        return new SimpleEngine( clock, caps );
+        return new SimpleEngine( clock, optExec, optCaps );
     }
 
 
     private final GRootController mRootController;
     private final SceneGraphPanel mRenderPane;
 
+    private final ScriptExecutor       mExec;
     private final WalkingActor         mCamera;
     private final CameraNode           mCameraNode;
     private final SpaceMouseController mSpaceMouseCont;
@@ -68,17 +65,18 @@ public class SimpleEngine {
     private       float   mMaxFps              = 80;
 
 
-    private SimpleEngine( Clock clock, GLCapabilities caps ) {
+    private SimpleEngine( Clock clock, ScriptExecutor exec, GLCapabilities caps ) {
         mRootController = GRootController.create( caps );
         mRootController.setClearColor( 1, 1, 1, 1 );
 
         mRenderPane = new SceneGraphPanel();
         mRootController.rootPane().addChild( mRenderPane );
 
-        mCamera = new WalkingActor();
+        mExec           = exec;
+        mCamera         = new WalkingActor( exec );
         mSpaceMouseCont = new SpaceMouseController( clock, mCamera );
-        mNavCont = new NavigationController( clock, mCamera );
-        mCameraNode = new CameraNode( mCamera );
+        mNavCont        = new NavigationController( clock, mCamera );
+        mCameraNode     = new CameraNode( mCamera );
 
         mCamera.rotate( (float)(Math.PI * 0.5), 0, 1, 0 );
         mCamera.rotate( (float)(-Math.PI * 0.5), 1, 0, 0 );
@@ -221,6 +219,8 @@ public class SimpleEngine {
         SceneGraph graph = new SceneGraph();
         graph.add( new InitNode() );
 
+        graph.connectLast( mExec );
+
         if( mPreModelGraph != null ) {
             graph.connectLast( mPreModelGraph );
         }
@@ -294,7 +294,7 @@ public class SimpleEngine {
     @Deprecated 
     public JFrame createFrame( int w, int h ) {
         JFrame frame = new JFrame();
-        
+
         frame.setSize( w, h );
         frame.setLocationRelativeTo( null );
         frame.add( awtComponent() );

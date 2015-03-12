@@ -47,8 +47,8 @@ public class SpaceMouseController extends DrawNodeAdapter implements EventSource
 
 
     public SpaceMouseController( Clock clock, WalkingActor actor ) {
-        mClock = clock == null ? Clock.SYSTEM_CLOCK : clock;
-        mActor = actor == null ? new WalkingActor() : actor;
+        mClock = clock;
+        mActor = actor;
         mSpaceHandler = new SpaceMouseHandler();
 
         SpaceNavigatorGroup group = null;

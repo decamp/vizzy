@@ -49,7 +49,7 @@ public class ClockNode extends DrawNodeAdapter {
     
     public ClockNode( PlayController playCont ) {
         mPlayCont  = playCont;
-        mTweenExec = ScriptExecutor.newInstance( playCont.clock() );
+        mTweenExec = new ScriptExecutor( playCont.clock() );
     }
             
     
@@ -65,7 +65,7 @@ public class ClockNode extends DrawNodeAdapter {
     @Override
     public void pushDraw( DrawEnv d ) {
         mPlayCont.tick();
-        mTweenExec.pushDraw( d );
+        mTweenExec.tick();
     }
 
 }
