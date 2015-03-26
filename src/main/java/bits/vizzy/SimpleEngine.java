@@ -20,6 +20,7 @@ import bits.draw3d.text.FontManager;
 import bits.glui.*;
 import bits.math3d.*;
 import bits.microtime.Clock;
+import bits.microtime.Ticker;
 import bits.vizzy.input.*;
 
 
@@ -219,8 +220,6 @@ public class SimpleEngine {
         SceneGraph graph = new SceneGraph();
         graph.add( new InitNode() );
 
-        graph.connectLast( mExec );
-
         if( mPreModelGraph != null ) {
             graph.connectLast( mPreModelGraph );
         }
@@ -251,6 +250,9 @@ public class SimpleEngine {
     
     
     private static final class InitNode extends DrawNodeAdapter {
+
+        InitNode() {}
+
         @Override
         public void pushDraw( DrawEnv d ) {
             d.mCullFace.apply( true );
