@@ -8,9 +8,6 @@ package bits.draw3d.anim;
 
 import java.util.*;
 
-import bits.data.segment.TimeRangedSet;
-import bits.draw3d.DrawEnv;
-import bits.draw3d.DrawNodeAdapter;
 import bits.math3d.func.Function11;
 import bits.microtime.*;
 
@@ -27,7 +24,7 @@ public class ScriptExecutor implements Ticker {
 
 
     private final Clock mClock;
-    private final TimeRangedSet<ScriptAction> mActions = new TimeRangedSet<ScriptAction>();
+    private final SortedSet<ScriptAction> mActions = new TreeSet<ScriptAction>( TimeRanged.START_TIME_ORDER );
     private final Queue<Update> mUpdates = new LinkedList<Update>();
 
 
@@ -122,12 +119,15 @@ public class ScriptExecutor implements Ticker {
         }
         
         long t = mClock.micros();
-        Iterator<ScriptAction> iter = mActions.intersectionSet( Long.MIN_VALUE, t ).iterator();
-
+        Iterator<ScriptAction> iter = mActions.iterator();
         while( iter.hasNext() ) {
-            if( iter.next().update( t ) ) {
+            ScriptAction a = iter.next();
+            if( a.startMicros() > t ) {
+                break;
+            }
+            if( a.update( t ) ) {
                 iter.remove();
-            }    
+            }
         }
     }
 
