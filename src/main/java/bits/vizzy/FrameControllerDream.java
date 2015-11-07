@@ -6,7 +6,7 @@
 
 package bits.vizzy;
 
-import javax.media.opengl.GL;
+import com.jogamp.opengl.GL;
 import com.jogamp.opengl.util.texture.Texture;
 
 

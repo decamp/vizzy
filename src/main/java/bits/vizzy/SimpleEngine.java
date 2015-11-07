@@ -8,8 +8,8 @@ package bits.vizzy;
 
 import java.awt.*;
 import javax.swing.JFrame;
-import javax.media.opengl.*;
-import static javax.media.opengl.GL.*;
+import com.jogamp.opengl.*;
+import static com.jogamp.opengl.GL.*;
 
 import bits.draw3d.*;
 import bits.draw3d.actors.Actor;

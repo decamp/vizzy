@@ -10,8 +10,8 @@ import java.io.*;
 import java.nio.*;
 import java.nio.channels.FileChannel;
 
-import javax.media.opengl.GL;
-import static javax.media.opengl.GL2ES3.*;
+import com.jogamp.opengl.GL;
+import static com.jogamp.opengl.GL2ES3.*;
 
 import bits.draw3d.DrawEnv;
 import bits.png.*;
